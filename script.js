@@ -64,6 +64,11 @@ function generateFractal(pattern) {
                 }
             }
             break;
+        case 'sierpinski':
+            sierpinski(canvas.width / 2, canvas.height / 2, canvas.width / 2, 8);
+            break;
+        default:
+            console.error(`Unknown pattern: ${pattern}`);
     }
 }
 
