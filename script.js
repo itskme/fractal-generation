@@ -75,3 +75,9 @@ function generateFractal(pattern) {
 // Initialize and generate the first fractal
 generateFractal('mandelbrot');
 
+
+canvas.addEventListener('click', () => {
+    const patterns = ['mandelbrot', 'julia', 'sierpinski'];
+    const randomPattern = patterns[Math.floor(Math.random() * patterns.length)];
+    generateFractal(randomPattern);
+});
