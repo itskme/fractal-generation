@@ -1,7 +1,7 @@
 const canvas = document.getElementById('fractal-canvas');
 const ctx = canvas.getContext('2d');
 
-
+// Fractal functions
 function mandelbrot(x, y, maxIter) {
     let zx = x;
     let zy = y;
@@ -20,7 +20,7 @@ function julia(x, y, maxIter) {
     let zy = y;
     let iter = 0;
     while (zx * zx + zy * zy < 4 && iter < maxIter) {
-        let temp = zx * zx - zy * zy + 0.285; 
+        let temp = zx * zx - zy * zy + 0.285; // Julia set parameters
         zy = 2 * zx * zy + 0.01;
         zx = temp;
         iter++;
@@ -42,7 +42,7 @@ function sierpinski(x, y, size, depth) {
     sierpinski(x + size / 4, y + size * Math.sqrt(3) / 4, size / 2, depth - 1);
 }
 
-
+// Generate fractal patterns
 function generateFractal(pattern) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     switch (pattern) {
@@ -55,9 +55,18 @@ function generateFractal(pattern) {
                 }
             }
             break;
+        case 'julia':
+            for (let x = 0; x < canvas.width; x++) {
+                for (let y = 0; y < canvas.height; y++) {
+                    let iter = julia((x - canvas.width / 2) / 200, (y - canvas.height / 2) / 200, 100);
+                    ctx.fillStyle = `hsl(${iter * 10}, 100%, 50%)`;
+                    ctx.fillRect(x, y, 1, 1);
+                }
+            }
+            break;
     }
 }
 
-
+// Initialize and generate the first fractal
 generateFractal('mandelbrot');
 
